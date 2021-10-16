@@ -1,17 +1,20 @@
 package com.shakil.notepadservice.entities;
 
-import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
+
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 public class Note implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    @GeneratedValue(generator="UUID")
+    @GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(nullable = false , updatable = false, unique = true)
+    private String id;
+
+    private String myId;
 
     @Column
     private String title;
@@ -19,11 +22,20 @@ public class Note implements Serializable {
     @Column
     private String body;
 
-    public Long getId() {
+    public Note(String id, String title, String body) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+    }
+
+    public Note() {
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -41,5 +53,14 @@ public class Note implements Serializable {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    @Override
+    public String toString() {
+        return "Note{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", body='" + body + '\'' +
+                '}';
     }
 }
