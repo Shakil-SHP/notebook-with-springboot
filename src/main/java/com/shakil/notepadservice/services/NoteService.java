@@ -4,6 +4,7 @@ import com.shakil.notepadservice.dtos.NoteDto;
 import com.shakil.notepadservice.entities.Note;
 import com.shakil.notepadservice.exceptions.NoteNotFoundException;
 import com.shakil.notepadservice.repositories.NoteRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,14 +14,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class NoteService {
 
     @Autowired
     private final NoteRepository noteRepository;
-
-    public NoteService(NoteRepository noteRepository) {
-        this.noteRepository = noteRepository;
-    }
 
     public List<NoteDto> allNotes() {
         return this.noteRepository.findAll().stream()
