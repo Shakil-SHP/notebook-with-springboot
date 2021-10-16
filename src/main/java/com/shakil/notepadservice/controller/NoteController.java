@@ -19,8 +19,8 @@ public interface NoteController {
     @GetMapping("/find/{id}")
     public ResponseEntity<Note> getNoteById(@PathVariable("id") String id);
 
-    @PutMapping("/update")
-    public ResponseEntity<?> update(@RequestBody NoteDto noteDto);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@RequestBody NoteDto noteDto, @PathVariable("id") String id);
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") String id);

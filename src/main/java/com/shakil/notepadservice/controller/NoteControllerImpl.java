@@ -3,7 +3,7 @@ package com.shakil.notepadservice.controller;
 import com.shakil.notepadservice.dtos.NoteDto;
 import com.shakil.notepadservice.entities.Note;
 import com.shakil.notepadservice.services.NoteService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/notes")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class NoteControllerImpl implements NoteController{
 
     @Autowired
@@ -32,12 +32,12 @@ public class NoteControllerImpl implements NoteController{
 
     @Override
     public ResponseEntity<Note> getNoteById(@PathVariable("id") String id) {
-        return ResponseEntity.ok(noteService.findNoteById(id));
+        return ResponseEntity.ok(noteService.findNote(id));
     }
 
     @Override
-    public ResponseEntity<?> update(@RequestBody NoteDto noteDto) {
-        noteService.updateNote(noteDto);
+    public ResponseEntity<?> update(@RequestBody NoteDto noteDto, @PathVariable("id") String id) {
+        noteService.updateNote(noteDto, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
