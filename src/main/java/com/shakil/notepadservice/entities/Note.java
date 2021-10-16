@@ -14,8 +14,6 @@ public class Note implements Serializable {
     @Column(nullable = false , updatable = false, unique = true)
     private String id;
 
-    private String myId;
-
     @Column
     private String title;
 
